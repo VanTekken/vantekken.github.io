@@ -9,6 +9,11 @@ body {
 	font-family: 'Playfair Display', serif;
   margin: 0;
 }
+.center{
+	text-align:center;
+	float:none;
+	margin:0 auto;
+}
 
 
 /* ------------------------------------------------------------------ */
